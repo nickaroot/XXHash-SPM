@@ -102,16 +102,16 @@ public enum XXHash {
         XXH_INLINE_XXH32_createState()
     }
 
-    public static func XXH32_freeState(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH32_freeState(state)
+    public static func XXH32_freeState(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?) -> Bool {
+        XXH_INLINE_XXH32_freeState(state).rawValue == 0
     }
 
-    public static func XXH32_reset(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?, seed: UInt32) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH32_reset(state, seed)
+    public static func XXH32_reset(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?, seed: UInt32) -> Bool {
+        XXH_INLINE_XXH32_reset(state, seed).rawValue == 0
     }
 
-    public static func XXH32_update(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?, input: UnsafeRawPointer, length: Int) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH32_update(state, input, length)
+    public static func XXH32_update(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?, input: UnsafeRawPointer, length: Int) -> Bool {
+        XXH_INLINE_XXH32_update(state, input, length).rawValue == 0
     }
 
     public static func XXH32_digest(state: UnsafeMutablePointer<XXH_NAMESPACEXXH32_state_t>?) -> UInt32 {
@@ -124,16 +124,16 @@ public enum XXHash {
         XXH_INLINE_XXH64_createState()
     }
 
-    public static func XXH64_freeState(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH64_freeState(state)
+    public static func XXH64_freeState(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?) -> Bool {
+        XXH_INLINE_XXH64_freeState(state).rawValue == 0
     }
 
-    public static func XXH64_reset(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?, seed: UInt64) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH64_reset(state, seed)
+    public static func XXH64_reset(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?, seed: UInt64) -> Bool {
+        XXH_INLINE_XXH64_reset(state, seed).rawValue == 0
     }
 
-    public static func XXH64_update(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?, input: UnsafeRawPointer, length: Int) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH64_update(state, input, length)
+    public static func XXH64_update(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?, input: UnsafeRawPointer, length: Int) -> Bool {
+        XXH_INLINE_XXH64_update(state, input, length).rawValue == 0
     }
 
     public static func XXH64_digest(state: UnsafeMutablePointer<XXH_NAMESPACEXXH64_state_t>?) -> UInt64 {
@@ -146,31 +146,38 @@ public enum XXHash {
         XXH_INLINE_XXH3_createState()
     }
 
-    public static func XXH3_freeState(state: OpaquePointer?) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH3_freeState(state)
+    public static func XXH3_freeState(state: OpaquePointer?) -> Bool {
+        XXH_INLINE_XXH3_freeState(state).rawValue == 0
     }
 
-    public static func XXH3_64bits_reset(state: OpaquePointer?) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH3_64bits_reset(state)
+    public static func XXH3_64bits_reset(state: OpaquePointer?) -> Bool {
+        XXH_INLINE_XXH3_64bits_reset(state).rawValue == 0
     }
 
-    public static func XXH3_64bits_update(state: OpaquePointer?, input: UnsafeRawPointer, length: Int) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH3_64bits_update(state, input, length)
+    public static func XXH3_64bits_update(state: OpaquePointer?, input: UnsafeRawPointer, length: Int) -> Bool {
+        XXH_INLINE_XXH3_64bits_update(state, input, length).rawValue == 0
     }
 
     public static func XXH3_64bits_digest(state: OpaquePointer?) -> UInt64 {
         XXH_INLINE_XXH3_64bits_digest(state)
     }
 
-    public static func XXH3_128bits_reset(state: OpaquePointer?) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH3_128bits_reset(state)
+    public static func XXH3_128bits_reset(state: OpaquePointer?) -> Bool {
+        XXH_INLINE_XXH3_128bits_reset(state).rawValue == 0
     }
 
-    public static func XXH3_128bits_update(state: OpaquePointer?, input: UnsafeRawPointer, length: Int) -> XXH_NAMESPACEXXH_errorcode {
-        XXH_INLINE_XXH3_128bits_update(state, input, length)
+    public static func XXH3_128bits_update(state: OpaquePointer?, input: UnsafeRawPointer, length: Int) -> Bool {
+        XXH_INLINE_XXH3_128bits_update(state, input, length).rawValue == 0
     }
 
-    public static func XXH3_128bits_digest(state: OpaquePointer?) -> XXH_NAMESPACEXXH128_hash_t {
-        XXH_INLINE_XXH3_128bits_digest(state)
+    public static func XXH3_128bits_digest(state: OpaquePointer?) -> XXH128Hash {
+        XXH128Hash(from: XXH_INLINE_XXH3_128bits_digest(state))
+    }
+    
+    @available(iOS 18.0, macOS 15.0, *)
+    public static func XXH3_128bits_digest(state: OpaquePointer?) -> UInt128 {
+        let xxh3_128bits = XXH_INLINE_XXH3_128bits_digest(state)
+        
+        return UInt128(xxh3_128bits.high64 << 64) | UInt128(xxh3_128bits.low64)
     }
 }
