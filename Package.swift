@@ -1,8 +1,15 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.0
+
 import PackageDescription
 
 let package = Package(
     name: "XXHashWrapper",
+    platforms: [
+        .macOS(.v10_13),
+        .iOS(.v12),
+        .tvOS(.v12),
+        .watchOS(.v4)
+    ],
     products: [
         .library(
             name: "XXHashWrapper",
